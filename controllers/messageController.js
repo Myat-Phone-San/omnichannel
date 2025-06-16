@@ -1,6 +1,7 @@
 const { replyLine } = require('../services/linebot');
 const { getBot } = require('../services/telegrambot');
 const { sendFacebookMessage } = require('../services/facebookbot');
+const { sendInstagramMessage } = require('../services/instagrambot');
 
 exports.replyToUser = async (req, res) => {
   const { platform, user_id, reply } = req.body;
