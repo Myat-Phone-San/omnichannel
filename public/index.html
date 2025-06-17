@@ -3,67 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bot Message Dashboard</title>
+  <title>Omnichannel Chat Dashboard</title>
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Custom scrollbar styles */
-    .overflow-y-auto::-webkit-scrollbar {
+    /* Custom scrollbar styles for a cleaner look */
+    .custom-scrollbar::-webkit-scrollbar {
       width: 8px;
     }
 
-    .overflow-y-auto::-webkit-scrollbar-track {
+    .custom-scrollbar::-webkit-scrollbar-track {
       background: #f1f1f1;
       border-radius: 10px;
     }
 
-    .overflow-y-auto::-webkit-scrollbar-thumb {
+    .custom-scrollbar::-webkit-scrollbar-thumb {
       background: #888;
       border-radius: 10px;
     }
 
-    .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
       background: #555;
+      border-radius: 10px;
+    }
+
+    /* Additional style for text break within message elements */
+    .break-words {
+      word-break: break-word;
     }
   </style>
 </head>
-<body class="bg-gray-100 min-h-screen p-6">
+<body class="bg-gray-100 min-h-screen p-6 font-sans antialiased">
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <section class="bg-white shadow-md rounded-lg p-4 flex flex-col h-[80vh]">
+  <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-8 tracking-tight">Omnichannel Chat Dashboard</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- LINE Messages Section -->
+    <section class="bg-white shadow-lg rounded-xl p-6 flex flex-col h-[85vh]">
       <h2 class="text-xl font-semibold text-green-600 mb-4 flex items-center gap-2">
-        <svg viewBox="0 0 377.764 377.764" class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" fill="#3ACE01" d="M77.315 0h223.133c42.523 0 77.315 34.792 77.315 77.315v223.133c0 42.523-34.792 77.315-77.315 77.315H77.315C34.792 377.764 0 342.972 0 300.448V77.315C0 34.792 34.792 0 77.315 0z"></path><path fill-rule="evenodd" clip-rule="evenodd" fill="#FFF" d="M188.515 62.576c76.543 0 138.593 49.687 138.593 110.979 0 21.409-7.576 41.398-20.691 58.351-.649.965-1.497 2.031-2.566 3.209l-.081.088c-4.48 5.36-9.525 10.392-15.072 15.037-38.326 35.425-101.41 77.601-109.736 71.094-7.238-5.656 11.921-33.321-10.183-37.925-1.542-.177-3.08-.367-4.605-.583l-.029-.002v-.002c-64.921-9.223-114.222-54.634-114.222-109.267-.002-61.292 62.049-110.979 138.592-110.979z"></path><path fill-rule="evenodd" clip-rule="evenodd" fill="#3ACE01" d="M108.103 208.954h27.952c3.976 0 7.228-3.253 7.228-7.229v-.603c0-3.976-3.252-7.228-7.228-7.228h-20.121v-45.779c0-3.976-3.252-7.228-7.228-7.228h-.603c-3.976 0-7.228 3.252-7.228 7.228v53.609c0 3.977 3.252 7.23 7.228 7.23zm173.205-33.603v-.603c0-3.976-3.253-7.228-7.229-7.228h-20.12v-11.445h20.12c3.976 0 7.229-3.252 7.229-7.228v-.603c0-3.976-3.253-7.228-7.229-7.228h-27.952c-3.976 0-7.228 3.252-7.228 7.228v53.609c0 3.976 3.252 7.229 7.228 7.229h27.952c3.976 0 7.229-3.253 7.229-7.229v-.603c0-3.976-3.253-7.228-7.229-7.228h-20.12v-11.445h20.12c3.976.002 7.229-3.251 7.229-7.226zm-53.755 31.448l.002-.003a7.207 7.207 0 0 0 2.09-5.07v-53.609c0-3.976-3.252-7.228-7.229-7.228h-.603c-3.976 0-7.228 3.252-7.228 7.228v31.469l-26.126-35.042c-1.248-2.179-3.598-3.655-6.276-3.655h-.603c-3.976 0-7.229 3.252-7.229 7.228v53.609c0 3.976 3.252 7.229 7.229 7.229h.603c3.976 0 7.228-3.253 7.228-7.229v-32.058l26.314 35.941c.162.252.339.494.53.724l.001.002c.723.986 1.712 1.662 2.814 2.075.847.35 1.773.544 2.742.544h.603a7.162 7.162 0 0 0 3.377-.844c.723-.344 1.332-.788 1.761-1.311zm-71.208 2.155h.603c3.976 0 7.228-3.253 7.228-7.229v-53.609c0-3.976-3.252-7.228-7.228-7.228h-.603c-3.976 0-7.229 3.252-7.229 7.228v53.609c0 3.976 3.253 7.229 7.229 7.229z"></path></g></svg>
+        <svg viewBox="0 0 377.764 377.764" class="h-7 w-7 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" fill="#3ACE01" d="M77.315 0h223.133c42.523 0 77.315 34.792 77.315 77.315v223.133c0 42.523-34.792 77.315-77.315 77.315H77.315C34.792 377.764 0 342.972 0 300.448V77.315C0 34.792 34.792 0 77.315 0z"></path><path fill-rule="evenodd" clip-rule="evenodd" fill="#FFF" d="M188.515 62.576c76.543 0 138.593 49.687 138.593 110.979 0 21.409-7.576 41.398-20.691 58.351-.649.965-1.497 2.031-2.566 3.209l-.081.088c-4.48 5.36-9.525 10.392-15.072 15.037-38.326 35.425-101.41 77.601-109.736 71.094-7.238-5.656 11.921-33.321-10.183-37.925-1.542-.177-3.08-.367-4.605-.583l-.029-.002v-.002c-64.921-9.223-114.222-54.634-114.222-109.267-.002-61.292 62.049-110.979 138.592-110.979z"></path><path fill-rule="evenodd" clip-rule="evenodd" fill="#3ACE01" d="M108.103 208.954h27.952c3.976 0 7.228-3.253 7.228-7.229v-.603c0-3.976-3.252-7.228-7.228-7.228h-20.121v-45.779c0-3.976-3.252-7.228-7.228-7.228h-.603c-3.976 0-7.228 3.252-7.228 7.228v53.609c0 3.977 3.252 7.23 7.228 7.23zm173.205-33.603v-.603c0-3.976-3.253-7.228-7.229-7.228h-20.12v-11.445h20.12c3.976 0 7.229-3.252 7.229-7.228v-.603c0-3.976-3.253-7.228-7.229-7.228h-27.952c-3.976 0-7.228 3.252-7.228 7.228v53.609c0 3.976 3.252 7.229 7.228 7.229h27.952c3.976 0 7.229-3.253 7.229-7.229v-.603c0-3.976-3.253-7.228-7.229-7.228h-20.12v-11.445h20.12c3.976.002 7.229-3.251 7.229-7.226zm-53.755 31.448l.002-.003a7.207 7.207 0 0 0 2.09-5.07v-53.609c0-3.976-3.252-7.228-7.229-7.228h-.603c-3.976 0-7.228 3.252-7.228 7.228v31.469l-26.126-35.042c-1.248-2.179-3.598-3.655-6.276-3.655h-.603c-3.976 0-7.229 3.252-7.229 7.228v53.609c0 3.976 3.252 7.229 7.229 7.229h.603c3.976 0 7.228-3.253 7.228-7.229v-32.058l26.314 35.941c.162.252.339.494.53.724l.001.002c.723.986 1.712 1.662 2.814 2.075.847.35 1.773.544 2.742.544h.603a7.162 7.162 0 0 0 3.377-.844c.723-.344 1.332-.788 1.761-1.311zm-71.208 2.155h.603c3.976 0 7.228-3.253 7.228-7.229v-53.609c0-3.976-3.252-7.228-7.228-7.228h-.603c-3.976 0-7.229 3.252-7.229 7.228v53.609c0 3.976 3.253 7.229 7.229 7.229z"></path></g></svg>
         LINE Messages
       </h2>
-      <ul id="lineMessages" class="flex-1 overflow-y-auto space-y-4"></ul>
+      <ul id="lineMessages" class="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar"></ul>
     </section>
 
-    <section class="bg-white shadow-md rounded-lg p-4 flex flex-col h-[80vh]">
+    <!-- Telegram Messages Section -->
+    <section class="bg-white shadow-lg rounded-xl p-6 flex flex-col h-[85vh]">
       <h2 class="text-xl font-semibold text-blue-600 mb-4 flex items-center gap-2">
-        <svg viewBox="0 0 32 32" class="h-6 w-6 text-blue-500" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="16" cy="16" r="14" fill="url(#paint0_linear_87_7225)"></circle> <path d="M22.9866 10.2088C23.1112 9.40332 22.3454 8.76755 21.6292 9.082L7.36482 15.3448C6.85123 15.5703 6.8888 16.3483 7.42147 16.5179L10.3631 17.4547C10.9246 17.6335 11.5325 17.541 12.0228 17.2023L18.655 12.6203C18.855 12.4821 19.073 12.7665 18.9021 12.9426L14.1281 17.8646C13.665 18.3421 13.7569 19.1512 14.314 19.5005L19.659 22.8523C20.2585 23.2282 21.0297 22.8506 21.1418 22.1261L22.9866 10.2088Z" fill="white"></path> <defs> <linearGradient id="paint0_linear_87_7225" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse"> <stop stop-color="#37BBFE"></stop> <stop offset="1" stop-color="#007DBB"></stop> </linearGradient> </defs> </g></svg>
+        <svg viewBox="0 0 32 32" class="h-7 w-7 text-blue-500" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="16" cy="16" r="14" fill="url(#paint0_linear_87_7225)"></circle> <path d="M22.9866 10.2088C23.1112 9.40332 22.3454 8.76755 21.6292 9.082L7.36482 15.3448C6.85123 15.5703 6.8888 16.3483 7.42147 16.5179L10.3631 17.4547C10.9246 17.6335 11.5325 17.541 12.0228 17.2023L18.655 12.6203C18.855 12.4821 19.073 12.7665 18.9021 12.9426L14.1281 17.8646C13.665 18.3421 13.7569 19.1512 14.314 19.5005L19.659 22.8523C20.2585 23.2282 21.0297 22.8506 21.1418 22.1261L22.9866 10.2088Z" fill="white"></path> <defs> <linearGradient id="paint0_linear_87_7225" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse"> <stop stop-color="#37BBFE"></stop> <stop offset="1" stop-color="#007DBB"></stop> </linearGradient> </defs> </g></svg>
         Telegram Messages
       </h2>
-      <ul id="telegramMessages" class="flex-1 overflow-y-auto space-y-4"></ul>
+      <ul id="telegramMessages" class="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar"></ul>
     </section>
 
-    <section class="bg-white shadow-md rounded-lg p-4 flex flex-col h-[80vh]">
+    <!-- Messenger Messages Section -->
+    <section class="bg-white shadow-lg rounded-xl p-6 flex flex-col h-[85vh]">
       <h2 class="text-xl font-semibold text-indigo-600 mb-4 flex items-center gap-2">
-        <svg viewBox="0 0 24 24" class="h-6 w-6 text-blue-500" id="meteor-icon-kit__regular-messanger" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 11.6407C0 4.9526 5.23944 0.000488281 12 0.000488281C18.7606 0.000488281 24 4.9526 24 11.6407C24 18.3289 18.7606 23.281 12 23.281C10.7855 23.281 9.61932 23.1216 8.52555 22.8198C8.31308 22.7619 8.08853 22.7788 7.88571 22.8681L5.50503 23.9184C4.88209 24.1912 4.17948 23.7494 4.15775 23.0685L4.09256 20.9341C4.0829 20.6709 3.96459 20.427 3.76901 20.2508C1.43421 18.1623 0 15.1393 0 11.6407ZM8.32032 9.45321L4.79517 15.0452C4.45473 15.5812 5.1163 16.1872 5.62093 15.8033L9.40684 12.9301C9.66278 12.7369 10.0153 12.7345 10.2736 12.9277L13.0769 15.0307C13.9171 15.6609 15.1195 15.4387 15.6797 14.5502L19.2048 8.95823C19.5453 8.42222 18.8837 7.81618 18.3791 8.20009L14.5932 11.0733C14.3372 11.2665 13.9847 11.2689 13.7264 11.0757L10.9231 8.97272C10.0829 8.34254 8.88048 8.56467 8.32032 9.45321Z" fill="#085ee7"></path></g></svg>
+        <svg viewBox="0 0 24 24" class="h-7 w-7 text-blue-500" id="meteor-icon-kit__regular-messanger" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 11.6407C0 4.9526 5.23944 0.000488281 12 0.000488281C18.7606 0.000488281 24 4.9526 24 11.6407C24 18.3289 18.7606 23.281 12 23.281C10.7855 23.281 9.61932 23.1216 8.52555 22.8198C8.31308 22.7619 8.08853 22.7788 7.88571 22.8681L5.50503 23.9184C4.88209 24.1912 4.17948 23.7494 4.15775 23.0685L4.09256 20.9341C4.0829 20.6709 3.96459 20.427 3.76901 20.2508C1.43421 18.1623 0 15.1393 0 11.6407ZM8.32032 9.45321L4.79517 15.0452C4.45473 15.5812 5.1163 16.1872 5.62093 15.8033L9.40684 12.9301C9.66278 12.7369 10.0153 12.7345 10.2736 12.9277L13.0769 15.0307C13.9171 15.6609 15.1195 15.4387 15.6797 14.5502L19.2048 8.95823C19.5453 8.42222 18.8837 7.81618 18.3791 8.20009L14.5932 11.0733C14.3372 11.2665 13.9847 11.2689 13.7264 11.0757L10.9231 8.97272C10.0829 8.34254 8.88048 8.56467 8.32032 9.45321Z" fill="#085ee7"></path></g></svg>
         Messenger Messages
       </h2>
-      <ul id="messengerMessages" class="flex-1 overflow-y-auto space-y-4"></ul>
+      <ul id="messengerMessages" class="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar"></ul>
     </section>
 
-    <section class="bg-white shadow-md rounded-lg p-4 flex flex-col h-[80vh]">
+    <!-- Instagram Messages Section -->
+    <section class="bg-white shadow-lg rounded-xl p-6 flex flex-col h-[85vh]">
       <h2 class="text-xl font-semibold text-purple-600 mb-4 flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-purple-500">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7 text-purple-500">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
         </svg>
         Instagram Messages
       </h2>
-      <ul id="instagramMessages" class="flex-1 overflow-y-auto space-y-4"></ul>
+      <ul id="instagramMessages" class="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar"></ul>
     </section>
   </div>
 
@@ -72,111 +84,196 @@
     const lineList = document.getElementById('lineMessages');
     const telegramList = document.getElementById('telegramMessages');
     const messengerList = document.getElementById('messengerMessages');
-    const instagramList = document.getElementById('instagramMessages'); // Get the new Instagram list
+    const instagramList = document.getElementById('instagramMessages');
 
     // Store references to the message containers for each user
-    const userMessageContainers = {
+    const userChatContainers = {
       line: {},
       telegram: {},
-      facebook: {}, // Assuming 'facebook' is the platform key for Messenger
-      instagram: {} // Added for Instagram
+      facebook: {},
+      instagram: {}
     };
 
+    // Store the last incoming message ID for each user, to be used when sending replies
+    const lastIncomingMessageIds = {
+        line: {},
+        telegram: {},
+        facebook: {},
+        instagram: {}
+    };
+
+    // --- Initial Message Fetching ---
+    // Fetches existing messages (both incoming and outgoing) from the server
     fetch('/messages')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then(data => {
         if (!Array.isArray(data)) {
-          console.error('Unexpected response:', data);
+          console.error('Initial messages fetch: Unexpected response format (expected array).', data);
           return;
         }
-        data.forEach(msg => renderMessage(msg, false)); // Pass false for initial load, don't scroll
+        data.forEach(msg => renderMessage(msg, false)); // Render without scrolling for initial load
       })
       .catch(error => console.error('Error fetching initial messages:', error));
 
+    // --- Real-time Message Handling ---
+    // Listens for 'new-message' events from the server via Socket.IO
     socket.on('new-message', (msg) => {
-      renderMessage(msg, true); // Pass true for new messages, scroll to bottom
+      console.log('Socket.IO received new message:', msg); // Debugging
+      renderMessage(msg, true); // Scroll to new real-time messages
     });
 
+    // --- Function to Render (Display) a Message ---
+    // data: { id, user_id, user_name, message, platform, sender, created_at }
     function renderMessage(data, shouldScroll) {
-      const { user_id, message, platform } = data;
+      console.log('Rendering message with data:', data); // Debugging
+      const { id, user_id, user_name, message, platform, sender } = data;
       let targetList;
-      let userContainerMap;
+      let userMap;
+      let lastMsgIdMap;
 
+      // Determine the correct list, user map, and last message ID map based on the platform
       if (platform === 'line') {
         targetList = lineList;
-        userContainerMap = userMessageContainers.line;
+        userMap = userChatContainers.line;
+        lastMsgIdMap = lastIncomingMessageIds.line;
       } else if (platform === 'telegram') {
         targetList = telegramList;
-        userContainerMap = userMessageContainers.telegram;
+        userMap = userChatContainers.telegram;
+        lastMsgIdMap = lastIncomingMessageIds.telegram;
       } else if (platform === 'facebook') {
         targetList = messengerList;
-        userContainerMap = userMessageContainers.facebook;
-      } else if (platform === 'instagram') { // Handle Instagram messages
+        userMap = userChatContainers.facebook;
+        lastMsgIdMap = lastIncomingMessageIds.facebook;
+      } else if (platform === 'instagram') {
         targetList = instagramList;
-        userContainerMap = userMessageContainers.instagram;
+        userMap = userChatContainers.instagram;
+        lastMsgIdMap = lastIncomingMessageIds.instagram;
       } else {
-        console.warn('Unknown platform:', platform);
-        return;
+        console.warn('Unknown platform for message:', platform, data);
+        return; // Exit if platform is not recognized
       }
 
-      let userEntry = userContainerMap[user_id];
+      // Store the ID of the last incoming message for this user
+      if (sender === 'user' && id) {
+          lastMsgIdMap[user_id] = id;
+          console.log(`Updated lastIncomingMessageIds for ${platform} ${user_id}: ${id}`); // Debugging
+      }
+
+      let userEntry = userMap[user_id];
 
       if (!userEntry) {
-        // Create a new entry for this user
+        // If no entry exists for this user, create a new one
         userEntry = document.createElement('li');
-        userEntry.className = "bg-white p-3 rounded shadow-md border border-gray-200"; // Added border for better separation
+        userEntry.className = "bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200 mb-4 flex flex-col h-full";
         userEntry.id = `${platform}-${user_id}`; // Unique ID for direct access
 
+        // Use user_name for display, fallback to user_id if user_name is not available or empty
+        const displayName = (user_name && user_name.trim() !== '') ? user_name : user_id;
+        console.log(`Creating new user entry for ${user_id}. Display name: ${displayName}`); // Debugging
+
         userEntry.innerHTML = `
-          <div class="flex items-center gap-2 mb-2">
-            <span class="font-bold text-md text-gray-800">${user_id}</span>
-            <span class="text-xs text-gray-500">(${platform.charAt(0).toUpperCase() + platform.slice(1)} User)</span>
+          <div class="flex items-center gap-3 mb-3 border-b pb-2">
+            <span class="font-bold text-base text-gray-800 break-words flex-1">${displayName}</span>
+            <span class="text-xs text-gray-500 px-2 py-0.5 bg-gray-200 rounded-full">${platform.charAt(0).toUpperCase() + platform.slice(1)}</span>
           </div>
-          <div class="messages-list space-y-1 text-gray-700 max-h-40 overflow-y-auto pr-2">
-            </div>
-          <div class="flex items-center gap-2 mt-4">
-            <input type="text" placeholder="Reply to ${user_id}..." class="flex-1 border rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
-            <button class="send-button bg-blue-500 text-white text-sm px-3 py-1 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Send</button>
+          <div class="messages-list flex-1 overflow-y-auto pr-2 custom-scrollbar flex flex-col space-y-2">
+          </div>
+          <div class="flex items-center gap-2 mt-4 pt-2 border-t">
+            <input type="text" placeholder="Type a reply..." class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            <button class="send-button bg-blue-600 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md">
+                Send
+            </button>
           </div>
         `;
         targetList.appendChild(userEntry);
-        userContainerMap[user_id] = userEntry;
+        userMap[user_id] = userEntry;
 
-        // Attach event listener for the send button
         const input = userEntry.querySelector('input');
         const button = userEntry.querySelector('.send-button');
-        button.onclick = () => {
-          const reply = input.value.trim();
-          if (!reply) return;
-          fetch('/reply', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ reply, user_id: user_id, platform: platform }),
-          })
-          .then(response => {
+        const messagesListDiv = userEntry.querySelector('.messages-list');
+
+        button.onclick = async () => {
+          const replyText = input.value.trim();
+          if (!replyText) return;
+
+          const incomingMessageId = lastMsgIdMap[user_id];
+          console.log(`Sending reply. Last incoming message ID for ${user_id}: ${incomingMessageId}`); // Debugging
+
+          // Display a temporary 'sending' message
+          const tempSendingMessage = document.createElement('div');
+          tempSendingMessage.className = "self-end max-w-[80%] bg-gray-300 text-gray-700 text-sm p-2 rounded-lg shadow-sm animate-pulse";
+          tempSendingMessage.textContent = "Sending...";
+          messagesListDiv.appendChild(tempSendingMessage);
+          messagesListDiv.scrollTop = messagesListDiv.scrollHeight;
+
+          try {
+            const response = await fetch('/reply', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                reply: replyText,
+                user_id: user_id,
+                platform: platform,
+                last_incoming_message_id: incomingMessageId // Pass the retrieved ID
+              }),
+            });
+
             if (!response.ok) {
-              throw new Error('Network response was not ok');
+              const errorBody = await response.text();
+              throw new Error(`Server responded with status ${response.status}: ${errorBody}`);
             }
-            return response.json(); // Or .text() if the server doesn't send JSON
-          })
-          .then(data => {
-            console.log('Reply sent successfully:', data);
-          })
-          .catch(error => {
+
+            messagesListDiv.removeChild(tempSendingMessage);
+
+            // Display the sent reply immediately on the dashboard
+            renderMessage({
+              user_id: user_id,
+              user_name: "You", // Or a specific bot name
+              message: replyText,
+              platform: platform,
+              sender: 'bot',
+              created_at: new Date().toISOString()
+            }, true);
+
+            input.value = '';
+
+          } catch (error) {
             console.error('Error sending reply:', error);
-          });
-          input.value = '';
+            if (messagesListDiv.contains(tempSendingMessage)) {
+                messagesListDiv.removeChild(tempSendingMessage);
+            }
+            const errorMessage = document.createElement('div');
+            errorMessage.className = "self-end max-w-[80%] bg-red-100 text-red-700 text-sm p-2 rounded-lg shadow-sm";
+            errorMessage.textContent = `Failed to send: ${error.message}`;
+            messagesListDiv.appendChild(errorMessage);
+          } finally {
+            messagesListDiv.scrollTop = messagesListDiv.scrollHeight;
+          }
         };
+
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            button.click();
+            e.preventDefault();
+          }
+        });
       }
 
-      // Append the new message to the user's message list
       const messagesListDiv = userEntry.querySelector('.messages-list');
-      const messageElement = document.createElement('p');
-      messageElement.className = "text-sm break-words"; // Added break-words for long messages
+      const messageElement = document.createElement('div');
+      messageElement.className = `max-w-[80%] p-2 rounded-lg shadow-sm text-sm break-words ${
+        sender === 'user'
+          ? 'bg-blue-100 text-gray-800 self-start'
+          : 'bg-green-100 text-gray-800 self-end'
+      }`;
       messageElement.textContent = message;
       messagesListDiv.appendChild(messageElement);
 
-      // Scroll to the bottom of the messages list if shouldScroll is true
       if (shouldScroll) {
         messagesListDiv.scrollTop = messagesListDiv.scrollHeight;
       }
